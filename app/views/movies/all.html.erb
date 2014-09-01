@@ -1,3 +1,5 @@
 <% @movie.each do |film| %>
 <%= film.title %> - <%= film.rating %><br />
 <%end%>
+<br />
+<%= link_to 'Add Movie', movies_create_path %>
