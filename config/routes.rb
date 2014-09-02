@@ -56,13 +56,22 @@ Rails.application.routes.draw do
 
 	#	root 'movies#new'
 
-	get  'movies/create' 	=> 'movies#new'
-  post 'movies'         => 'movies#create'
-	get  'movies/list'		=> 'movies#all'
-  get  'movies/edit'    => 'movies#edit'
-  delete 'movies/delete'  => 'movies#delete'
-  get  'movies'         => 'movies#all'
+	#get  'movies/create' 	=> 'movies#new'  
+	#get  'movies/list'		=> 'movies#all'
+  #get  'movies/edit'    => 'movies#edit'  
+  #get  'movies'         => 'movies#all'
+  #post 'movies'         => 'movies#create'
+  #delete 'movies/delete'  => 'movies#delete'
 
-  root 'movies#all'
+  root 'movies#index'
 
+  resources :movies
+  resources :users
+  resources :signup
+  resources :sessions, only: [:new, :create, :destroy]
+
+  #match '/signup',  to: 'users#new',            via: 'get'
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
+  
 end

@@ -3,14 +3,17 @@ class MoviesController < ApplicationController
 		@movie = Movie.new
 	end
 
-	def all
+	def index
 		@movies = Movie.order('rating DESC')
+	end
+
+	def show
+		@movie = Movie.find(params[:id])
 	end
 
 	def create
 		swap_date(movie_params)
 		@movie = Movie.new(movie_params)
-
 		if @movie.save
 			redirect_to '/movies/list'
 		else
@@ -18,8 +21,8 @@ class MoviesController < ApplicationController
 		end
 	end
 
-	def delete
-		Movie.find(params[:format]).destroy
+	def destroy
+		Movie.find(params[:id]).destroy
 		redirect_to '/movies/list'
 
 	end

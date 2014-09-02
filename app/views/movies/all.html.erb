@@ -1,8 +1,0 @@
-<% if @movies.empty? %>
-Geen films in database
-<% end %>
-<% @movies.each do |film| %>
-<%= film.title %> - <%= film.rating %> - <%= link_to "delete", movies_delete_path(film.id), method: :delete %><br />
-<%end%>
-<br />
-<%= link_to 'Add Movie', movies_create_path %>

@@ -1,0 +1,3 @@
+<% @users.each do |user| %>
+<%= user.username %> - <%= link_to "delete", user, method: :delete %> <br />
+<% end %>
