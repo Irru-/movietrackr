@@ -55,9 +55,13 @@ Rails.application.routes.draw do
   #   end
 
 	#	root 'movies#new'
+
 	get  'movies/create' 	=> 'movies#new'
   post 'movies'         => 'movies#create'
 	get  'movies/list'		=> 'movies#all'
+  get  'movies/edit'    => 'movies#edit'
+  delete 'movies/delete'  => 'movies#delete'
+  get  'movies'         => 'movies#all'
 
   root 'movies#all'
 

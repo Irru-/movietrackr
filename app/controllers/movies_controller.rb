@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
 	end
 
 	def all
-		@movie = Movie.order('rating DESC')
+		@movies = Movie.order('rating DESC')
 	end
 
 	def create
@@ -18,10 +18,16 @@ class MoviesController < ApplicationController
 		end
 	end
 
+	def delete
+		Movie.find(params[:format]).destroy
+		redirect_to '/movies/list'
+
+	end
+
 	private
 
 		def movie_params
-			params.require(:movie).permit(:title, :rating, :saw_movie_at)
+			params.require(:movie).permit(:title, :rating, :saw_movie_at, :comment)
 		end
 
 		def swap_date(movie_params)
