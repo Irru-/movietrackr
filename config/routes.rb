@@ -59,4 +59,6 @@ Rails.application.routes.draw do
   post 'movies'         => 'movies#create'
 	get  'movies/list'		=> 'movies#all'
 
+  root 'movies#all'
+
 end
