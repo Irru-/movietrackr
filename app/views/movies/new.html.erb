@@ -1,5 +1,6 @@
 <%= form_for @movie do |f| %>
   <%= f.text_field :title %> <br />
   <%= f.text_field :rating %> <br />
+  <%= f.date_select(:saw_movie_at, order: [:day, :month, :year]) %> <br />
   <%= f.submit "Create" %>
 <% end %>
