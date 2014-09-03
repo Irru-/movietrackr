@@ -65,10 +65,12 @@ Rails.application.routes.draw do
 
   root 'movies#index'
 
-  resources :movies
+  resources :movies, only: [:new, :create, :index]
   resources :users
   resources :signup
   resources :sessions, only: [:new, :create, :destroy]
+
+  get   'movies/own'  => 'movies#own'
 
   #match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

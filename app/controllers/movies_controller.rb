@@ -29,6 +29,13 @@ class MoviesController < ApplicationController
 		end
 	end
 
+	def own
+		@movies = Movie.where(user_id: current_user.id)
+		if @movies.nil?
+			@movies = @movie.order('rating DESC')
+		end
+	end
+
 	def destroy
 		Movie.find(params[:id]).destroy
 		redirect_to '/movies/'
