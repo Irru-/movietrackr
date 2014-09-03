@@ -11,7 +11,20 @@
 Geen films in database
 <% end %>
 <% @movies.each do |film| %>
-<%= film.id %> - <%= film.title %> - <%= film.rating %> - <%= link_to "delete", film, method: :delete %><br />
+<%= film.id %> - <%= film.title %> - <%= film.rating %> - <%= film.user.username %>  
+
+<% if signed_in? && current_user.admin? %>
+
+- <%= link_to "delete", film, method: :delete %>
+
+<% end %>
+
+<br />
+
 <%end%>
 <br />
-<%= link_to 'Add Movie', new_movie_path %>
+<% if signed_in? %>
+	<%= link_to 'Add Movie', new_movie_path %>
+<% else %>
+	<%= link_to 'Log in', signin_path %>
+<% end %>

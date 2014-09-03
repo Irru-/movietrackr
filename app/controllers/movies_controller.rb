@@ -4,7 +4,12 @@ class MoviesController < ApplicationController
 	end
 
 	def index
-		@movies = Movie.order('rating DESC')
+		if signed_in?
+			@movies = Movie.where(user_id: current_user.id)
+			@movies = @movies.order('rating DESC')
+		else
+			@movies = Movie.order('rating DESC')
+		end
 	end
 
 	def show
@@ -14,8 +19,9 @@ class MoviesController < ApplicationController
 	def create
 		swap_date(movie_params)
 		@movie = Movie.new(movie_params)
+		@movie[:user_id] = current_user.id
 		if @movie.save
-			redirect_to '/movies/list'
+			redirect_to '/movies/'
 		else
 			render 'new'
 		end
@@ -23,14 +29,14 @@ class MoviesController < ApplicationController
 
 	def destroy
 		Movie.find(params[:id]).destroy
-		redirect_to '/movies/list'
+		redirect_to '/movies/'
 
 	end
 
 	private
 
 		def movie_params
-			params.require(:movie).permit(:title, :rating, :saw_movie_at, :comment)
+			params.require(:movie).permit(:title, :rating, :saw_movie_at, :comment, :user_id)
 		end
 
 		def swap_date(movie_params)
