@@ -65,7 +65,7 @@ Rails.application.routes.draw do
 
   root 'movies#index'
 
-  resources :movies, only: [:new, :create, :index]
+  resources :movies , only: [:new, :create, :destroy, :index]
   resources :users
   resources :signup
   resources :sessions, only: [:new, :create, :destroy]

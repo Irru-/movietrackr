@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
 
 	def index
 		if signed_in?
-			#@movies = Movie.where(user_id: current_user.id)
+			@own_movies = Movie.where(user_id: current_user.id)
 			@movies = Movie.order('rating DESC')
 		else
 			@movies = Movie.order('rating DESC')

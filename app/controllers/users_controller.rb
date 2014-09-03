@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-	before_action :signed_in_user, only: [:edit, :update]
-	before_action :correct_user,   only: [:edit, :update]
+	before_action :signed_in_user, 	only: [:index, :show, 	:edit, :update]
+	before_action :correct_user,   	only: [:edit, :update]
+	before_action :admin_user,		only: [:index, :show]
 
 	def index
 		@users = User.all
@@ -40,6 +41,10 @@ class UsersController < ApplicationController
 	end
 
 	private
+
+		def admin_user
+			redirect_to '/movies' unless current_user.admin
+		end
 
 		def user_params
 			params.require(:user).permit(:username, :password)

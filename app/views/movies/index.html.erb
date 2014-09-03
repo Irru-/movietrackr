@@ -11,7 +11,13 @@
 
 		<%= link_to "Add a movie", new_movie_path %> - 
 		<%= link_to "View all movies", movies_path %> -
+
+		<% if !@own_movies.empty? %>
+
 		<%= link_to "View own movies", movies_own_path %> -
+		
+		<% end %>
+
 		<%= link_to "Edit profile", edit_user_path(current_user) %> - 
 		<%= link_to "Sign out", signout_path, method: "delete" %>
 
@@ -42,7 +48,12 @@
 		<% @movies.each do |film| %>
 
 		<tr>
-			<td><%= film.id %></td>
+			<td><%= film.id %>  
+			<% if signed_in? && current_user.admin?%>
+
+				- <%= link_to "delete", film, method: :delete %>
+
+			<% end %></td>
 			<td><%= film.title %></td>	
 			<td><%= film.rating %></td>
 			<td><%= film.user.username %></td>
@@ -54,13 +65,3 @@
 
 <% end %>
 </center>
-
-<!--
-
-	<% if signed_in? && current_user.admin? %>
-
-		- <%= link_to "delete", film, method: :delete %>
-
-	<% end %>
-
--->

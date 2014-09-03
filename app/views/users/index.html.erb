@@ -1,3 +1,8 @@
 <% @users.each do |user| %>
-<%= user.id %> - <%= user.username %> - <%= user.password %> - <%= link_to "delete", user, method: :delete %> <br />
+<%= user.id %> - <%= user.username %> - <%= user.password %>
+
+<% if current_user != user %>
+	- <%= link_to "delete", user, method: :delete %> 
+<% end %>
+<br />
 <% end %>
