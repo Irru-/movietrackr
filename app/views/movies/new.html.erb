@@ -1,10 +1,18 @@
+<center>
 <% if signed_in? %>
 	<%= form_for @movie do |f| %>
-	  <%= f.text_field :title %> <br />
-	  <%= f.text_field :rating %> <br />
-	  <%= f.date_select(:saw_movie_at, order: [:day, :month, :year]) %> <br />
+		<%= f.label :Filmtitel %> <br />
+	  	<%= f.text_field :title %> <br /><br />
+
+	  	<%= f.label :Cijfer %> <br />
+	  	<%= f.text_field :rating %> <br /><br />
+
+	  	<%= f.label :Gezien_op %><br />
+	  	<%= f.date_select(:saw_movie_at, order: [:day, :month, :year]) %> <br /><br />
+
 	  <%= f.submit "Create" %>
 	<% end %>
 <% else %>
 	<h2> Please log in to enter a movie in the database </h2>
 <% end %>
+</center>

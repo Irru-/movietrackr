@@ -1,5 +1,13 @@
-<%= form_for @user do |f| %>
-  <%= f.text_field :username %> <br />
-  <%= f.password_field :password %> <br />
-  <%= f.submit "Create" %>
-<% end %>
+<center>
+	<%= form_for @user do |f| %>
+		
+		<%= f.label :username %> 
+	    <%= f.text_field :username %> <br />
+
+	    <%= f.label :password %> 
+	    <%= f.password_field :password %><br /><br />
+				  
+		<%= f.submit "Sign up", class: "btn btn-large btn-primary" %>
+	
+	<% end %>
+</center>

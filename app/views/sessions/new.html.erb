@@ -1,11 +1,13 @@
-<%= form_for(:session, url: sessions_path) do |f| %>
+<center>
+	<%= form_for(:session, url: sessions_path) do |f| %>
 
-	<%= f.label :username %>
-    <%= f.text_field :username %> <br />
+		<%= f.label :username %> 
+	    <%= f.text_field :username %> <br />
 
-    <%= f.label :password %>
-    <%= f.password_field :password %><br />
+	    <%= f.label :password %> 
+	    <%= f.password_field :password %><br /><br />
 
-    <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+	    <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
 
-<% end %>
+	<% end %>
+</center>

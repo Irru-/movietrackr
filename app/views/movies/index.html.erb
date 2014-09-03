@@ -1,30 +1,66 @@
-<% if signed_in? %>
-  <h1>Hello, <%= current_user.username %>!</h1>
-  Click <%= link_to "here", signout_path, method: "delete" %> to log out.
-<% else %>
-  Noob
-<% end %>
+<center>
+
+	<h1>Welcome to MovieTrackr</h1>
+	<% if signed_in? %>
+	  <h2>Hello, <%= current_user.username %>!</h2>
+	<% end %>
+	<br />
+	<br />
+
+	<% if signed_in? %>
+
+		<%= link_to "Add a movie", new_movie_path %> - 
+		<%= link_to "View all movies", movies_path %> -
+		<%= link_to "View own movies" %> -
+		<%= link_to "Edit profile", edit_user_path(current_user) %> - 
+		<%= link_to "Sign out", signout_path, method: "delete" %>
+
+	<% else %>
+
+		<%= link_to "Log in", signin_path %> - 
+		<%= link_to "Sign up", signup_index_path %> -
+		<%= link_to "View all movies", movies_path %>
+
+	<% end %>
 
 <br />
 <br />
+
 <% if @movies.empty? %>
-Geen films in database
-<% end %>
-<% @movies.each do |film| %>
-<%= film.id %> - <%= film.title %> - <%= film.rating %> - <%= film.user.username %>  
-
-<% if signed_in? && current_user.admin? %>
-
-- <%= link_to "delete", film, method: :delete %>
-
-<% end %>
-
-<br />
-
-<%end%>
-<br />
-<% if signed_in? %>
-	<%= link_to 'Add Movie', new_movie_path %>
+	Geen films in database
 <% else %>
-	<%= link_to 'Log in', signin_path %>
+
+	<table>
+
+		<tr>
+			<th>ID</th>
+			<th>Titel</th>
+			<th>Cijfer</th>
+			<th>Toegevoegd door</th>
+		</tr>
+
+		<% @movies.each do |film| %>
+
+		<tr>
+			<td><%= film.id %></td>
+			<td><%= film.title %></td>	
+			<td><%= film.rating %></td>
+			<td><%= film.user.username %></td>
+		</tr>
+
+		<% end %>
+
+	</table>
+
 <% end %>
+</center>
+
+<!--
+
+	<% if signed_in? && current_user.admin? %>
+
+		- <%= link_to "delete", film, method: :delete %>
+
+	<% end %>
+
+-->

@@ -1,0 +1,9 @@
+<center>
+	<h2>Edit your profile</h2>
+
+	<%= form_for @user do |f| %>
+	  <%= f.text_field :username %> <br />
+	  <%= f.password_field :password %> <br />
+	  <%= f.submit "Create" %>
+	<% end %>
+</center>

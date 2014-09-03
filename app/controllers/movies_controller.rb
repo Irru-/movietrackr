@@ -1,12 +1,14 @@
 class MoviesController < ApplicationController
+	before_action :signed_in_user, only: [:new]
+
 	def new
 		@movie = Movie.new
 	end
 
 	def index
 		if signed_in?
-			@movies = Movie.where(user_id: current_user.id)
-			@movies = @movies.order('rating DESC')
+			#@movies = Movie.where(user_id: current_user.id)
+			@movies = Movie.order('rating DESC')
 		else
 			@movies = Movie.order('rating DESC')
 		end
@@ -44,5 +46,9 @@ class MoviesController < ApplicationController
 			movie_params["saw_movie_at(1i)"] = movie_params["saw_movie_at(3i)"]
 			movie_params["saw_movie_at(3i)"] = temp
 			movie_params
+		end
+
+		def signed_in_user
+			redirect_to signin_url unless signed_in?
 		end
 end
