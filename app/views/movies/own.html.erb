@@ -42,10 +42,10 @@
 		<% @movies.each do |film| %>
 
 		<tr>
-			<td><%= film.id %> - 
+			<td><%= film.id %> 
 			<% if signed_in? && current_user.admin?%>
 
-				<%= link_to "delete", film, method: :delete %>
+				- <%= link_to "delete", film, method: :delete %>
 
 			<% end %></td>
 			<td><%= film.title %></td>	

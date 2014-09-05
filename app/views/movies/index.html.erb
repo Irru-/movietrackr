@@ -21,6 +21,12 @@
 		<%= link_to "Edit profile", edit_user_path(current_user) %> - 
 		<%= link_to "Sign out", signout_path, method: "delete" %>
 
+		<% if current_user.admin? %>
+
+		- <%= link_to "Admin panel", admin_index_path %>
+
+		<% end %>
+
 	<% else %>
 
 		<%= link_to "Log in", signin_path %> - 

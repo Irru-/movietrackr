@@ -1,4 +1,5 @@
-class SignupController < ApplicationController
+class SignupController < 
+  ApplicationController
 
 	def index
 		@user = User.new

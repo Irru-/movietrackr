@@ -2,13 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-table, td, th {
-	border: 3px solid black;
+table, th, td{
+	border: 2px solid black
 }
 
 th, td {
 	padding: 5px;
 	text-align: center;
 }
-
-
