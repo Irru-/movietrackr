@@ -8,11 +8,7 @@ class SessionsController < ApplicationController
 
 	def create
 		@user = User.find_by(username: params[:session][:username])
-		if @user.nil?
-			logger.debug "@user.class = #{@user.class}"
-			@user = User.find_by(email: params[:session][:username])
-			logger.debug "@user.email = #{@user.email}"
-		end
+		@user = User.find_by(email: params[:session][:username]) if @user.nil?
 		pwcheck = params[:session][:password]
 		if (!@user.nil? && @user.password == pwcheck)
 			sign_in @user
