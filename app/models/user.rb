@@ -1,7 +1,14 @@
+require 'bcrypt'
+
 class User < ActiveRecord::Base
-	validates_uniqueness_of :username
-	validates_presence_of :password
 	include BCrypt
+
+	validates_uniqueness_of :username, :message => "already exists."
+
+	validates_presence_of	:username, :message => "can't be empty."
+
+	#validates :email, email: true
+
 	before_create :create_remember_token
 	has_many :movies
 
@@ -20,7 +27,7 @@ class User < ActiveRecord::Base
 	def password=(new_password)
 		@password = Password.create(new_password)
 		self.password_hash = @password
-	end 
+	end
 
 	private
 

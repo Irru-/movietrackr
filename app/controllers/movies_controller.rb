@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-	before_action :signed_in_user, only: [:new]
+	before_action :signed_in_user, only: [:new, :own]
 
 	def new
 		@movie = Movie.new

@@ -34,24 +34,24 @@
 
 		<tr>
 			<th>ID</th>
-			<th>Titel</th>
-			<th>Cijfer</th>
-			<th>Toegevoegd door</th>
+			<th>Title</th>
+			<th>Rating</th>
+			<th>Added By</th>
+			<th>Actions</th>
 		</tr>
 
 		<% @movies.each do |film| %>
 
-		<tr>
-			<td><%= film.id %> 
-			<% if signed_in? && current_user.admin?%>
-
-				- <%= link_to "delete", film, method: :delete %>
-
-			<% end %></td>
-			<td><%= film.title %></td>	
-			<td><%= film.rating %></td>
-			<td><%= film.user.username %></td>
-		</tr>
+			<tr>
+				<td><%= film.id %></td>
+				<td><%= film.title %></td>	
+				<td><%= film.rating %></td>
+				<td><%= film.user.username %></td>
+				<td>
+					<%= link_to "delete", film, method: :delete %> -
+					<%= link_to "edit", edit_movie_path(film) %>
+				</td>						
+			</tr>
 
 		<% end %>
 

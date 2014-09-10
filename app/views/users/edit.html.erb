@@ -1,9 +1,12 @@
+<div class = "testbox">
 <center>
 	<h2>Edit your profile</h2>
 
 	<%= form_for @user do |f| %>
-	  <%= f.text_field :username %> <br />
-	  <%= f.password_field :password %> <br />
-	  <%= f.submit "Create" %>
+		<%= f.text_field :username , :readonly => true %> <br />
+	  	<%= f.text_field :email, :placeholder => "Email" %> <br />
+	  	<%= f.password_field :password, :placeholder => "Password" %> <br />
+	  	<%= f.submit "Create" %>
 	<% end %>
 </center>
+</div>

@@ -21,6 +21,7 @@ module Movietrackr
     # config.i18n.default_locale = :de
 
     config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W["#{config.root}/app/validators/"]
 
   end
 end

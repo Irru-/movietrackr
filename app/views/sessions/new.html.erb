@@ -1,13 +1,16 @@
-<center>
-	<%= form_for(:session, url: sessions_path) do |f| %>
+<div class = "testbox">
+	<center>
 
-		<%= f.label :username %> 
-	    <%= f.text_field :username %> <br />
+		<h1>Log In</h1>
 
-	    <%= f.label :password %> 
-	    <%= f.password_field :password %><br /><br />
+		<%= form_for(:session, url: sessions_path) do |f| %>
 
-	    <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+		    <%= f.text_field :username, :placeholder => "Username or email" %>
+	 
+		    <%= f.password_field :password, :placeholder => "Password" %><br />
 
-	<% end %>
-</center>
+		    <%= f.submit "Log in", class: "btn btn-large btn-primary" %>
+
+		<% end %>
+	</center>
+</div>
