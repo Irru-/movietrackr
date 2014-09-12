@@ -6,11 +6,20 @@ class MoviesController < ApplicationController
 	end
 
 	def index
+
+		@id = Movie.sorteer_decide_i(params[:sorteer])
+		@title = Movie.sorteer_decide_t(params[:sorteer])
+		@rating = Movie.sorteer_decide_r(params[:sorteer])
+		@username = Movie.sorteer_decide_u(params[:sorteer])
+
 		if signed_in?
 			@own_movies = Movie.where(user_id: current_user.id)
-			@movies = Movie.order('rating DESC')
+		end
+
+		if params[:sorteer].present?
+			@movies = Movie.sorteer(params[:sorteer])
 		else
-			@movies = Movie.order('rating DESC')
+			@movies = Movie.order('id ASC')
 		end
 	end
 

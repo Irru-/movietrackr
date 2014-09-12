@@ -1,83 +1,94 @@
 <center>
 
-	<h1>Welcome to MovieTrackr</h1>
-	<% if signed_in? %>
-	  <h2>Hello, <%= current_user.username %>!</h2>
-	<% end %>
-	<br />
-	<br />
+  <h1>Welcome to MovieTrackr</h1>
+  <% if signed_in? %>
+    <h2>Hello, <%= current_user.username %>!</h2>
+  <% end %>
+  <br />
+  <br />
 
-	<% if signed_in? %>
+  <% if signed_in? %>
 
-		<%= link_to "Add a movie", new_movie_path %> - 
-		<%= link_to "View all movies", movies_path %> -
+    <%= link_to "Add a movie", new_movie_path %> - 
+    <%= link_to "View all movies", movies_path %> -
 
-		<% if !@own_movies.empty? %>
+    <% if !@own_movies.empty? %>
 
-		<%= link_to "View own movies", movies_own_path %> -
-		
-		<% end %>
+    <%= link_to "View own movies", movies_own_path %> -
+    
+    <% end %>
 
-		<%= link_to "Edit profile", edit_user_path(current_user) %> - 
-		<%= link_to "Sign out", signout_path, method: "delete" %>
+    <%= link_to "Edit profile", edit_user_path(current_user) %> - 
+    <%= link_to "Sign out", signout_path, method: "delete" %>
 
-		<% if current_user.admin? %>
+    <% if current_user.admin? %>
 
-		- <%= link_to "Admin panel", admin_index_path %>
+    - <%= link_to "Admin panel", admin_index_path %>
 
-		<% end %>
+    <% end %>
 
-	<% else %>
+  <% else %>
 
-		<%= link_to "Log in", signin_path %> - 
-		<%= link_to "Sign up", signup_index_path %> -
-		<%= link_to "View all movies", movies_path %>
+    <%= link_to "Log in", signin_path %> - 
+    <%= link_to "Sign up", signup_index_path %> -
+    <%= link_to "View all movies", movies_path %>
 
-	<% end %>
+  <% end %>
 
 <br />
 <br />
 
 <% if @movies.empty? %>
-	Geen films in database
+  Geen films in database
 <% else %>
 
-	<table>
+  <table>
 
-		<tr>
-			<th>ID</th>
-			<th>Title</th>
-			<th>Rating</th>
-			<th>Added By</th>
+    <tr>
+      <th>
+          <%= link_to "Id", movies_path(:sorteer => @id) %>
+      </th>
+      <th>
+          <%= link_to "Title", movies_path(:sorteer => @title) %>
+      </th>
+      <th>
+          <%= link_to "Rating", movies_path(:sorteer => @rating) %>
+      </th>
+      <th>
+          <%= link_to "Added by", movies_path(:sorteer => @username) %>
+      </th>
 
-			<% if signed_in? && current_user.admin? %>
+      <% if signed_in? && current_user.admin? %>
 
-				<th>Actions</th>
+        <th>Actions</th>
 
-			<% end %>
+      <% end %>
 
-		</tr>
+    </tr>
 
-		<% @movies.each do |film| %>
+    <% @movies.each do |film| %>
 
-		<tr>
-			<td><%= film.id %></td>
-			<td><%= film.title %></td>	
-			<td><%= film.rating %></td>
-			<td><%= film.user.username %></td>			
+    <tr>
+      <td><%= film.id %></td>
+      <td><%= film.title %></td>  
+      <td><%= film.rating %></td>
+      <td><%= film.user.username %></td>      
 
-			<% if signed_in? && current_user.admin? %>
+      <% if signed_in? && current_user.admin? %>
 
-				<td>
-					<%= link_to "delete", film, method: :delete %>
-				</td>
-			
-			<% end %>			
-		</tr>
+        <td>
+          <%= link_to "delete", film, method: :delete %>
+        </td>
+      
+      <% end %>     
+    </tr>
 
-		<% end %>
+    <% end %>
 
-	</table>
+  </table>
 
 <% end %>
+<br /> <br />
+<%= debug(params) if Rails.env.development? %>
+
 </center>
