@@ -1,18 +1,17 @@
+<div class = "testbox">
 <center>
-<% if signed_in? %>
+
+	<h1>Add a movie</h1>
 	<%= form_for @movie do |f| %>
-		<%= f.label :Filmtitel %> <br />
-	  	<%= f.text_field :title %> <br /><br />
+	  	<%= f.text_field :title, :placeholder => "Title" %> <br /><br />
 
-	  	<%= f.label :Cijfer %> <br />
-	  	<%= f.text_field :rating %> <br /><br />
+	  	<%= f.text_field :rating, :placeholder => "Rating out of 10" %> <br /><br />
 
-	  	<%= f.label :Gezien_op %><br />
+	  	<%= f.label :Visited_at %><br />
 	  	<%= f.date_select(:saw_movie_at, order: [:day, :month, :year]) %> <br /><br />
 
 	  <%= f.submit "Create" %>
 	<% end %>
-<% else %>
-	<h2> Please log in to enter a movie in the database </h2>
-<% end %>
+
 </center>
+</div>

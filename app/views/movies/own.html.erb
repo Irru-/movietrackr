@@ -7,25 +7,6 @@
 	<br />
 	<br />
 
-	<% if signed_in? %>
-
-		<%= link_to "Add a movie", new_movie_path %> - 
-		<%= link_to "View all movies", movies_path %> -
-		<%= link_to "View own movies", movies_own_path %> -
-		<%= link_to "Edit profile", edit_user_path(current_user) %> - 
-		<%= link_to "Sign out", signout_path, method: "delete" %>
-
-	<% else %>
-
-		<%= link_to "Log in", signin_path %> - 
-		<%= link_to "Sign up", signup_index_path %> -
-		<%= link_to "View all movies", movies_path %>
-
-	<% end %>
-
-<br />
-<br />
-
 <% if @movies.empty? %>
 	Geen films in database
 <% else %>
@@ -36,7 +17,6 @@
 			<th>ID</th>
 			<th>Title</th>
 			<th>Rating</th>
-			<th>Added By</th>
 			<th>Actions</th>
 		</tr>
 
@@ -46,7 +26,6 @@
 				<td><%= film.id %></td>
 				<td><%= film.title %></td>	
 				<td><%= film.rating %></td>
-				<td><%= film.user.username %></td>
 				<td>
 					<%= link_to "delete", film, method: :delete %> -
 					<%= link_to "edit", edit_movie_path(film) %>
