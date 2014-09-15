@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 	before_action :admin_user,		only: [:index, :show]
 
 	def index
+		@user = User.find(current_user.id)
 		@users = User.all
 	end
 
@@ -16,7 +17,8 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@user = User.find(params[:id])
+		#@user = User.find(params[:id])
+		@user = User.find(current_user.id)
 	end
 
 	def update

@@ -14,7 +14,8 @@ class SessionsController < ApplicationController
             sign_in @user
             redirect_to root_url
         else
-            render 'new'
+            flash[:error] = "Wrong username/password combination. Please try again."
+            redirect_to root_url
         end
     end
 

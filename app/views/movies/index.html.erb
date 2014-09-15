@@ -1,5 +1,4 @@
 <center>
-
   <h1>Welcome to MovieTrackr</h1>
   <% if signed_in? %>
     <h2>Hello, <%= current_user.username %>!</h2>
@@ -11,9 +10,9 @@
   Geen films in database
 <% else %>
 
-  <table class="table">
+  <table class="table table-striped">
 
-    <tr>
+    <tr class="info">
       <th>
           <%= link_to "Id", movies_path(:sorteer => @id) %>
       </th>
@@ -46,7 +45,9 @@
       <% if signed_in? && current_user.admin? %>
 
         <td>
-          <%= link_to "delete", film, method: :delete %>
+        <div class="btn-group">
+          <%= button_to "Delete", film, method: :delete, :class => "btn btn-danger" %> <%= button_to "Edit", edit_movie_path(film), :class => "btn btn-warning" %>
+        </div>
         </td>
       
       <% end %>     

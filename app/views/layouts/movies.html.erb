@@ -44,15 +44,43 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Movietrackr</a>
+        </button>        
+        <%= link_to "MovieTrackr", root_path, :class => "navbar-brand" %>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav navbar-right">
           <% if !signed_in? %>
-            <li><%= link_to "Log in", signin_path %></li>
             <li><%= link_to "Sign up", signup_index_path %></li>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In<strong class="caret"></strong></a>
+              <div class="dropdown-menu" style="padding: 15px; padding-bottom: 15px;">
+                <%= form_for(:session, url: sessions_path) do |f| %>
+
+                  <%= f.text_field :username, :placeholder => "Username or email" %>
+             
+                  <%= f.password_field :password, :placeholder => "Password" %><br />
+
+                  <%= f.submit "Log in", class: "btn btn-large btn-primary" %> <br />
+
+                <% end %>
+              </div>
+            </li>
           <% else %>
-            <li><%= link_to "Edit profile", edit_user_path(current_user) %></li>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">Edit profile<strong class="caret"></strong></a>
+              <div class="dropdown-menu" style="padding: 15px; padding-bottom: 15px;">
+                <%= form_for User.find(current_user.id) do |f| %>
+                  <%= f.text_field :username , :readonly => true %>
+
+                  <%= f.text_field :email, :placeholder => "Email" %>
+
+                  <%= f.password_field :password, :placeholder => "Password" %>
+
+                  <%= f.submit "Edit profile", class: "btn btn-large btn-primary" %>
+                <% end %>
+              </div>
+            </li>
             <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
           <% end %>
           </ul>
@@ -68,9 +96,8 @@
         </div>
         <div class="col-lg-3">
           <div class="well sidebar-nav">
-            <h3>Sidebar</h3>
             <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
+              <li class="nav-header">Movies</li>
               <% if signed_in? %>
 
                 <li><%= link_to "Add a movie", new_movie_path %></li>
@@ -96,7 +123,7 @@
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2014</p>
+        <p>&copy; MovieTrackr 2014</p>
       </footer>
 
     </div> <!-- /container -->
