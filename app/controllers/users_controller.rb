@@ -38,7 +38,8 @@ class UsersController < ApplicationController
 			sign_in @user
 			redirect_to '/movies'
 		else
-			render 'signup/index'
+			flash[:error] = "Username or email already exists. Please try again."
+            redirect_to root_url
 		end
 	end
 

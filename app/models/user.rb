@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
 	validates_presence_of	:username, :message => "can't be empty."
 
+	validates_presence_of	:password_hash, :message => "can't be empty."
+
 	#validates :email, email: true
 
 	before_create :create_remember_token
