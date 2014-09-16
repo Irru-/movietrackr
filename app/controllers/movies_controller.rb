@@ -31,6 +31,7 @@ class MoviesController < ApplicationController
 		swap_date(movie_params)
 		@movie = Movie.new(movie_params)
 		@movie[:user_id] = current_user.id
+		@movie[:imdb]	= @movie.addImdbLink(@movie[:title])
 		if @movie.save
 			redirect_to '/movies/'
 		else
@@ -54,7 +55,7 @@ class MoviesController < ApplicationController
 	private
 
 		def movie_params
-			params.require(:movie).permit(:title, :rating, :saw_movie_at, :comment, :user_id)
+			params.require(:movie).permit(:title, :rating, :saw_movie_at, :comment, :user_id, :imdb)
 		end
 
 		def swap_date(movie_params)

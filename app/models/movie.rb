@@ -1,3 +1,5 @@
+require 'imdb'
+
 class Movie < ActiveRecord::Base
 	validates :rating, :numericality => {:only_integer => true}
 	belongs_to :user
@@ -54,6 +56,11 @@ class Movie < ActiveRecord::Base
 
 		p == 'username' ? 'username_' : 'username'
 
+	end
+
+	def addImdbLink(title)
+		i = Imdb::Search.new(title)
+		i.movies.first.url
 	end
 
 end

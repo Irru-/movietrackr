@@ -32,6 +32,8 @@ gem 'dynamic_form'
 
 gem 'twitter-bootstrap-rails'
 
+gem 'imdb'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
