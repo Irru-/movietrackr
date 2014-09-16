@@ -38,15 +38,18 @@
 
     <tr>
       <td><%= film.id %></td>
-      <td><%= film.title %></td>  
+      <td><%= film.title %> - <%= link_to "Add imdb link", movies_search_path(:title => film.title) %></td>  
       <td><%= film.rating %></td>
       <td><%= film.user.username %></td>      
 
       <% if signed_in? && current_user.admin? %>
 
         <td>
-        <div class="btn-group">
-          <%= button_to "Delete", film, method: :delete, :class => "btn btn-danger" %> <%= button_to "Edit", edit_movie_path(film), :class => "btn btn-warning" %>
+        <div style="float:left;">
+          <%= button_to "Edit", edit_movie_path(film), :class => "btn btn-warning" %> 
+        </div>
+        <div style="float:right;">        
+          <%= button_to "Delete", film, method: :delete, :class => "btn btn-danger" %> 
         </div>
         </td>
       

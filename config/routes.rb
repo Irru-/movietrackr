@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   resources :admin
 
   get   'movies/own'  => 'movies#own'
+  get   'movies/search' => 'movies#search'
 
   #match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

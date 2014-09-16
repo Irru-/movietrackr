@@ -45,6 +45,11 @@ class MoviesController < ApplicationController
 		end
 	end
 
+	def search
+		bf = BadFruit.new("7y3ev7dshky24eynky3apa4m")
+		@result = bf.movies.search_by_name(params[:title])
+	end
+
 	def destroy
 		Movie.find(params[:id]).destroy
 		redirect_to '/movies/'

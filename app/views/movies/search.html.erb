@@ -1,0 +1,38 @@
+<center>
+<h2>Search results for '<%= params[:title] %>'</h2>
+
+<table class="table table-striped">
+
+	<tr class="info">
+	      <th>
+	          Poster
+	      </th>
+	      <th>
+	          Title
+	      </th>
+	      <th>
+	          Action
+	      </th>
+	</tr>
+
+	<% @result.each do |movie| %>
+
+	<tr>
+		<td>
+		<%= image_tag(movie.posters.thumbnail) %>
+		</td>
+		<td>
+		<%= movie.name %>
+		</td>
+		<td>
+		-
+		</td>
+	</tr>
+
+	<% end %>
+
+</table>
+
+
+
+<%= debug(params) if Rails.env.development? %>	
