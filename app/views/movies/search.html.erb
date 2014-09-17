@@ -5,11 +5,13 @@
 
 	<tr class="info">
 	      <th>
-	          Poster
+	        Poster
 	      </th>
 	      <th>
-	          Title
+	      	Title
 	      </th>
+	      <th>
+	      	Url
 	      <th>
 	          Action
 	      </th>
@@ -25,7 +27,10 @@
 		<%= movie.name %>
 		</td>
 		<td>
-		-
+		<%= link_to "RottenTomatoes", movie.links['alternate'], :target => "_blank" %>
+		</td>
+		<td>
+		<%= link_to "Add link", movies_path(:url => movie.links['alternate'], :id => params[:id], :title => movie.name) %>
 		</td>
 	</tr>
 

@@ -21,6 +21,14 @@ class MoviesController < ApplicationController
 		else
 			@movies = Movie.order('id ASC')
 		end
+
+		if params[:url].present?
+			movie = Movie.find(params[:id])
+			movie.imdb = params[:url]
+			movie.title = params[:title]
+			movie.save
+			redirect_to '/movies/'
+		end
 	end
 
 	def show
@@ -47,7 +55,7 @@ class MoviesController < ApplicationController
 
 	def search
 		bf = BadFruit.new("7y3ev7dshky24eynky3apa4m")
-		@result = bf.movies.search_by_name(params[:title])
+		@result = bf.movies.search_by_name(params[:title], 10)
 	end
 
 	def destroy
@@ -59,7 +67,7 @@ class MoviesController < ApplicationController
 	private
 
 		def movie_params
-			params.require(:movie).permit(:title, :rating, :saw_movie_at, :comment, :user_id)
+			params.require(:movie).permit(:title, :rating, :saw_movie_at, :comment, :user_id, :imdb)
 		end
 
 		def swap_date(movie_params)

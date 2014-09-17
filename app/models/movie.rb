@@ -55,5 +55,4 @@ class Movie < ActiveRecord::Base
 		p == 'username' ? 'username_' : 'username'
 
 	end
-
 end

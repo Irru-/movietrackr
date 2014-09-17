@@ -85,9 +85,12 @@
             </li>
 
           <% else %>
+
+
+
             <li class="divider-vertical"></li>
             <li class="dropdown">
-              <a class="dropdown-toggle" href="#" data-toggle="dropdown">Edit profile<strong class="caret"></strong></a>
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">Edit profile (<%= current_user.username %>)<strong class="caret"></strong></a>
               <div class="dropdown-menu" style="padding: 15px; padding-bottom: 15px;">
                 <%= form_for User.find(current_user.id) do |f| %>
                   <%= f.text_field :username , :readonly => true %>
@@ -127,7 +130,11 @@
 
                 <% if current_user.admin? %>
 
-                <li><%= link_to "Admin panel", admin_index_path %></li>
+                  <br />
+
+                  <li class="nav-header">Admin options</li>
+
+                  <li><%= link_to "Admin panel", admin_index_path %></li>
 
                 <% end %>
 
