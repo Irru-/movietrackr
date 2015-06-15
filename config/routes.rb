@@ -65,7 +65,7 @@ Rails.application.routes.draw do
 
   root 'movies#index'
 
-  resources :movies , only: [:new, :create, :destroy, :index, :edit]
+  resources :movies, only: [:new, :create, :destroy, :index, :edit]
   resources :users
   resources :signup
   resources :sessions, only: [:new, :create, :destroy]
@@ -77,5 +77,7 @@ Rails.application.routes.draw do
   #match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
+  match '/reset',   to: 'movies#reset',         via: 'get'
+  match '/stepup',  to: 'sessions#stepup',      via: 'get'
   
 end

@@ -1,4 +1,5 @@
 require 'bcrypt'
+require 'zlib'
 
 class User < ActiveRecord::Base
 	include BCrypt
@@ -12,7 +13,8 @@ class User < ActiveRecord::Base
 	#validates :email, email: true
 
 	before_create :create_remember_token
-	has_many :movies
+	has_many :movies	
+	has_one :context
 
 	def User.new_remember_token
 		SecureRandom.urlsafe_base64
@@ -29,6 +31,34 @@ class User < ActiveRecord::Base
 	def password=(new_password)
 		@password = Password.create(new_password)
 		self.password_hash = @password
+	end
+
+	def check_totp(one_time_password)
+		base32 	= Base32.encode(username).tr("=", "")
+		totp 	= ROTP::TOTP.new(base32)
+
+		totp.now == one_time_password
+	end
+
+	# Check context of user
+	def check_context(ip_address, location)
+		check_time && check_ip(ip_address) && check_location(location)
+	end
+
+	def check_time
+		starting_time 	= context.starting_time
+		ending_time		= context.ending_time
+		current_time	= Time.zone.now.to_s.split(" ")[1]
+
+		starting_time < current_time && current_time < ending_time
+	end
+
+	def check_ip(ip_address)
+		context.ip_address == ip_address
+	end
+
+	def check_location(location)
+		context.location == location
 	end
 
 	private

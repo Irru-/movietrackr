@@ -17,3 +17,5 @@ class AdminController < ApplicationController
 		end
 
 end
+
+#I editted this!

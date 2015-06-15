@@ -22,6 +22,7 @@ module Movietrackr
 
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W["#{config.root}/app/validators/"]
+    config.time_zone = "CET"
 
   end
 end

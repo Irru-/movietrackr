@@ -10,13 +10,39 @@ class SessionsController < ApplicationController
         @user = User.find_by(username: params[:session][:username])
         @user = User.find_by(email: params[:session][:username]) if @user.nil?
         pwcheck = params[:session][:password]
+        otp     = params[:session][:otp]
         if (!@user.nil? && @user.password == pwcheck)
-            sign_in @user
-            redirect_to root_url
+            #Context check here
+            location = request.location
+            if (location.nil?)
+                location = "Unknown"
+            else
+                location = location.city
+            end
+            if (@user.check_context(request.remote_ip, location))
+                sign_in @user
+                redirect_to root_url
+            else
+                if (otp.nil?)                   
+                    redirect_to stepup_path(:user => @user.username)
+                else
+                    if (@user.check_totp(otp))
+                        sign_in @user
+                        redirect_to root_url
+                    else
+                        redirect_to stepup_path
+                        flash[:error] = "Wrong One-Time Password. Please try again."
+                    end
+                end
+            end
         else
             flash[:error] = "Wrong username/password combination. Please try again."
             redirect_to root_url
         end
+    end
+
+    def stepup
+        @test = request.remote_ip
     end
 
     def destroy

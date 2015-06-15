@@ -1,6 +1,7 @@
 <center>
   <% if @movies.empty? %>
-    Geen films in database
+    Geen films in database <br />
+    <%= request.location.class %>
   <% else %>
 
   <table class="table table-striped">
@@ -51,7 +52,7 @@
 
         <td>
         <div style="float:left;">
-          <%= button_to "Edit", edit_movie_path(film), :class => "btn btn-warning" %> 
+          <%= link_to "Edit", edit_movie_path(film), :class => "btn btn-warning" %>
         </div>
         <div style="float:right;">        
           <%= button_to "Delete", film, method: :delete, :class => "btn btn-danger" %> 

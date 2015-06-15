@@ -1,0 +1,19 @@
+Mon, 15 Jun 2015 04:58:39 -0400
+README.rdoc	Wed, 20 May 2015 13:08:30 -0400
+app/controllers/admin_controller.rb	Wed, 20 May 2015 13:08:30 -0400
+app/controllers/application_controller.rb	Wed, 20 May 2015 13:08:30 -0400
+app/controllers/movies_controller.rb	Mon, 15 Jun 2015 04:45:33 -0400
+app/controllers/sessions_controller.rb	Mon, 15 Jun 2015 04:56:14 -0400
+app/controllers/signup_controller.rb	Wed, 20 May 2015 13:08:30 -0400
+app/controllers/users_controller.rb	Sun, 14 Jun 2015 07:06:23 -0400
+app/helpers/admin_helper.rb	Wed, 20 May 2015 13:08:30 -0400
+app/helpers/application_helper.rb	Wed, 20 May 2015 13:08:30 -0400
+app/helpers/movies_helper.rb	Wed, 20 May 2015 13:08:30 -0400
+app/helpers/sessions_helper.rb	Wed, 20 May 2015 13:08:30 -0400
+app/helpers/signup_helper.rb	Wed, 20 May 2015 13:08:30 -0400
+app/helpers/users_helper.rb	Wed, 20 May 2015 13:08:30 -0400
+app/models/context.rb	Sun, 14 Jun 2015 12:08:41 -0400
+app/models/movie.rb	Wed, 20 May 2015 13:08:30 -0400
+app/models/user.rb	Mon, 15 Jun 2015 04:58:12 -0400
+app/validators/email_validator.rb	Wed, 20 May 2015 13:08:30 -0400
+lib/BeforeFilter.rb	Wed, 20 May 2015 13:08:31 -0400

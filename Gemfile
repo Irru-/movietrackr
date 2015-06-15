@@ -36,6 +36,12 @@ gem 'json'
 
 gem 'badfruit'
 
+gem 'rotp'
+
+gem 'base32'
+
+gem 'geocoder'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -64,6 +64,13 @@ class MoviesController < ApplicationController
 
 	end
 
+	def reset
+		Movie.delete_all
+		User.delete_all
+
+		redirect_to root_url
+	end
+
 	private
 
 		def movie_params
