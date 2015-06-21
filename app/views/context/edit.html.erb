@@ -13,13 +13,18 @@
       <br />
 
       <%= f.fields_for :locations do |ff| %>
-	      <div>
+        <div>
 	      	<%= ff.label :location %>
-	      	<%= ff.text_field :location %>
-	      	<% if ff.object.persisted? %>
+          <% if (@loc_size == ff.index) %>
+            <%= ff.text_field :location, :value => params[:location] %>
+          <% else %>
+            <%= ff.text_field :location %>
+          <% end %>
+	      	
+          <% if ff.object.persisted? %>
       			<%= ff.check_box :_destroy %>
-      			<%= ff.label :_destroy, "Destroy" %>
-    		<% end %>
+      			<%= ff.label :_destroy, "Delete" %>
+          <% end %>
 	   	  </div>
       <% end %>
 
@@ -28,15 +33,27 @@
       <%= f.fields_for :ip_addresses do |ff| %>
 	      <div>
 	      	<%= ff.label :ip_address %>
-	      	<%= ff.text_field :ip_address %>
+          
+          <% if (@ip_size == ff.index) %>
+	      	  <%= ff.text_field :ip_address, :value => params[:ip] %>
+          <% else %>
+            <%= ff.text_field :ip_address %>
+          <% end %>
+
 	      	<% if ff.object.persisted? %>
       			<%= ff.check_box :_destroy %>
-      			<%= ff.label :_destroy, "Destroy" %>
+      			<%= ff.label :_destroy, "Delete" %>
     		<% end %>
 	   	  </div>
       <% end %>     
 
       <br />
+      
+      <% if params[:location] %>
+        <%= hidden_field_tag 'suggested', params[:location] %>
+      <% elsif params[:ip] %>
+        <%= hidden_field_tag 'suggested', params[:ip] %>
+      <% end %>
 
       <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>

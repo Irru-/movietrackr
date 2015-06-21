@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
 	#validates :email, email: true
 
 	before_create :create_remember_token
-	has_many :movies	
+	has_many :movies
+	has_many :stepups	
 	has_one :context
 
 	def User.new_remember_token
@@ -40,15 +41,19 @@ class User < ActiveRecord::Base
 		totp.now == one_time_password
 	end
 
-	# Check context of user
-	def check_context(ip_address, location)
-		check_time && check_ip(ip_address) && check_location(location)
+	def get_totp
+		base32 	= Base32.encode(username).tr("=", "")
+		totp 	= ROTP::TOTP.new(base32).now
 	end
 
-	def check_time		
+	# Check context of user
+	def check_context(current_context)
+		check_time(current_context[0]) && check_ip(current_context[1]) && check_location(current_context[2])
+	end
+
+	def check_time(current_time)
 		starting_time 	= context.starting_time
 		ending_time		= context.ending_time
-		current_time	= Time.zone.now.to_s.split(" ")[1]
 
 		if (starting_time.nil? || ending_time.nil? )
 			return true
@@ -71,6 +76,20 @@ class User < ActiveRecord::Base
 		else
 			!Context.where(:id => context.id).includes(:locations).where("locations.location" => location).empty?
 		end
+	end
+
+
+	def add_stepup(current_context)
+		stepup 			= Stepup.new
+		stepup.user_id 	= id
+		stepup.time 	= current_context[0]
+		stepup.ip 		= current_context[1]
+		if (current_context[2] == "Unknown")
+			stepup.location = nil
+		else
+			stepup.location = current_context[2]
+		end
+		stepup.save
 	end
 
 	private

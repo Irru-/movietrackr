@@ -73,8 +73,32 @@
 
   </table>
 
+  <h2> Suggested changes </h2>
+
+  <% @suggested_ips.each do |key, value| %>
+    <% ip   = key[0] %>
+    <% user = User.find(key[1]) %> 
+    
+    <div>
+    <%= link_to "Voeg #{ip} toe aan #{user.username}", edit_context_path(user.context, 
+    :ip => ip, :user => user, :type => 0) %>
+    </div>
+
+  <% end %>
+
+  <% @suggested_locations.each do |key, value| %>
+    <% loc   = key[0] %>
+    <% user = User.find(key[1]) %> 
+    
+    <div>
+    <%= link_to "Voeg #{loc} toe aan #{user.username}", edit_context_path(user.context, 
+    :location => loc, :user => user, :type => 0) %>
+    </div>
+
+  <% end %>
+
 <% end %>
 <br /> <br />
 <%= debug(params) if Rails.env.development? %>
-
+<%= @suggested_ips.empty? %>
 </center>

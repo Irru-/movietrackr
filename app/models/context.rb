@@ -20,5 +20,6 @@ class Context < ActiveRecord::Base
 			result = result + ip.ip_address + ", "
 		end
 		result[0..-3]
-	end	
+	end
+
 end

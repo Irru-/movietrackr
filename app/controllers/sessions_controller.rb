@@ -13,13 +13,19 @@ class SessionsController < ApplicationController
         otp     = params[:session][:otp]
         if (!@user.nil? && @user.password == pwcheck)
             #Context check here
+            
             location = request.location
+            current_time = Time.zone.now.to_s.split(" ")[1]
+            ip = request.remote_ip
             if (location.nil?)
                 location = "Unknown"
             else
                 location = location.city
             end
-            if (@user.check_context(request.remote_ip, location))
+
+            context = [current_time, ip, location]
+
+            if (@user.check_context(context))
                 sign_in @user
                 redirect_to root_url
             else
@@ -27,6 +33,7 @@ class SessionsController < ApplicationController
                     redirect_to stepup_path(:user => @user.username)
                 else
                     if (@user.check_totp(otp))
+                        @user.add_stepup(context)
                         sign_in @user
                         redirect_to root_url
                     else

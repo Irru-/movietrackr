@@ -80,5 +80,6 @@ Rails.application.routes.draw do
   match '/signout', to: 'sessions#destroy',     via: 'delete'
   match '/reset',   to: 'movies#reset',         via: 'get'
   match '/stepup',  to: 'sessions#stepup',      via: 'get'
+  match '/suggested', to: 'context#suggested',  via: 'get'
   
 end
