@@ -45,20 +45,32 @@ class User < ActiveRecord::Base
 		check_time && check_ip(ip_address) && check_location(location)
 	end
 
-	def check_time
+	def check_time		
 		starting_time 	= context.starting_time
 		ending_time		= context.ending_time
 		current_time	= Time.zone.now.to_s.split(" ")[1]
 
-		starting_time < current_time && current_time < ending_time
+		if (starting_time.nil? || ending_time.nil? )
+			return true
+		else
+			starting_time < current_time && current_time < ending_time
+		end
 	end
 
 	def check_ip(ip_address)
-		context.ip_address == ip_address
+		if (context.ip_addresses.empty?)
+			return true
+		else
+			!Context.where(:id => context.id).includes(:ip_addresses).where("ip_addresses.ip_address" => ip_address).empty?
+		end
 	end
 
 	def check_location(location)
-		context.location == location
+		if (context.locations.empty?)
+			return true
+		else
+			!Context.where(:id => context.id).includes(:locations).where("locations.location" => location).empty?
+		end
 	end
 
 	private

@@ -11,12 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614163242) do
+ActiveRecord::Schema.define(version: 20150621095837) do
 
   create_table "contexts", force: true do |t|
     t.integer  "user_id"
-    t.string   "location"
-    t.string   "ip_address"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "starting_time"
@@ -24,6 +22,20 @@ ActiveRecord::Schema.define(version: 20150614163242) do
   end
 
   add_index "contexts", ["user_id"], name: "index_contexts_on_user_id"
+
+  create_table "ip_addresses", force: true do |t|
+    t.integer  "context_id"
+    t.string   "ip_address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "locations", force: true do |t|
+    t.integer  "context_id"
+    t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "movies", force: true do |t|
     t.string   "title"

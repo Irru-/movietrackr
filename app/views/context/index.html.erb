@@ -1,0 +1,80 @@
+<center>
+  <% if @users.empty? %>
+    Geen users in database <br />
+  <% else %>
+
+  <table class="table table-striped">
+
+    <tr class="info">
+      <th>
+          Username
+      </th>
+      <th>
+          Allowed time
+      </th>
+      <th>
+          Allowed IP(s)
+      </th>
+      <th>
+          Allowed Location(s)
+      </th>
+      <% if signed_in? && current_user.admin? %>
+
+        <th>Actions</th>
+
+      <% end %>
+
+    </tr>
+
+    <% @users.each do |user| %>
+
+    <tr>
+      <td><%= user.username %></td>
+
+      <td>
+        <% if user.context.starting_time.nil? || user.context.ending_time.nil? %>
+          nil
+        <% else %>
+          <%= user.context.starting_time %> - <%= user.context.ending_time %>
+        <% end %>        
+      </td>  
+
+      <td>
+        <% if user.context.ip_addresses.nil? %>
+          nil
+        <% else %>
+          <% user.context.ip_addresses.each do |ip| %>
+            <%= ip.ip_address %> 
+          <% end %>
+        <% end %>  
+      </td>
+
+      <td>
+        <% if user.context.locations.nil? %>
+          nil
+        <% else %>
+          <% user.context.locations.each do |loc| %>
+            <%= loc.location %> 
+          <% end %>
+        <% end %>        
+      </td>  
+
+      <% if signed_in? && current_user.admin? %>
+
+        <td>
+        <div style="float:left;">
+          <%= link_to "Edit", edit_context_path(user.context), :class => "btn btn-warning" %>
+        </div>
+
+      <% end %>         
+    </tr>
+
+    <% end %>
+
+  </table>
+
+<% end %>
+<br /> <br />
+<%= debug(params) if Rails.env.development? %>
+
+</center>

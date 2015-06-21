@@ -1,0 +1,46 @@
+    <%= form_for(setup_context(@context)) do |f| %>
+
+      Changing log-in context for <%= @user.username %><br /><br />
+
+      <%= f.hidden_field :user_id, value: @user.id %>
+
+      <%= f.label :starting_time, "Starting Time HH:MM:SS" %>
+      <%= f.text_field :starting_time, class: 'form-control' %>
+
+      <%= f.label :ending_time, "Ending Time HH:MM:SS" %>
+      <%= f.text_field :ending_time, class: 'form-control' %>
+
+      <br />
+
+      <%= f.fields_for :locations do |ff| %>
+	      <div>
+	      	<%= ff.label :location %>
+	      	<%= ff.text_field :location %>
+	      	<% if ff.object.persisted? %>
+      			<%= ff.check_box :_destroy %>
+      			<%= ff.label :_destroy, "Destroy" %>
+    		<% end %>
+	   	  </div>
+      <% end %>
+
+      <br />
+
+      <%= f.fields_for :ip_addresses do |ff| %>
+	      <div>
+	      	<%= ff.label :ip_address %>
+	      	<%= ff.text_field :ip_address %>
+	      	<% if ff.object.persisted? %>
+      			<%= ff.check_box :_destroy %>
+      			<%= ff.label :_destroy, "Destroy" %>
+    		<% end %>
+	   	  </div>
+      <% end %>     
+
+      <br />
+
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+<%= debug(params) if Rails.env.development? %>
+
+
+
