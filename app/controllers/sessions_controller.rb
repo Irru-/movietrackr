@@ -37,8 +37,8 @@ class SessionsController < ApplicationController
                         sign_in @user
                         redirect_to root_url
                     else
-                        redirect_to stepup_path
                         flash[:error] = "Wrong One-Time Password. Please try again."
+                        redirect_to stepup_path                        
                     end
                 end
             end

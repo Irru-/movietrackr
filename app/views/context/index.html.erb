@@ -29,11 +29,11 @@
     <% @users.each do |user| %>
 
     <tr>
-      <td><%= user.username %></td>
+      <td><%= user.username %> <%= user.id %></td>
 
       <td>
         <% if user.context.starting_time.nil? || user.context.ending_time.nil? %>
-          nil
+          
         <% else %>
           <%= user.context.starting_time %> - <%= user.context.ending_time %>
         <% end %>        
@@ -93,6 +93,17 @@
     <div>
     <%= link_to "Voeg #{loc} toe aan #{user.username}", edit_context_path(user.context, 
     :location => loc, :user => user, :type => 0) %>
+    </div>
+
+  <% end %>
+
+  <% @suggested_times.each do |key, value| %>
+    <% time   = key[0] %>
+    <% user = User.find(key[1]) %> 
+    
+    <div>
+    <%= link_to "Voeg #{time} toe aan #{user.username}", edit_context_path(user.context, 
+    :time => time, :user => user, :type => 0) %>
     </div>
 
   <% end %>

@@ -3,6 +3,7 @@ class ContextController < ApplicationController
 		@users = User.all
 		@suggested_ips 			= Stepup.group(:ip, :user_id).count.select{|k,v| v > 4 && !k[0].nil?}
 		@suggested_locations 	= Stepup.group(:location, :user_id).count.select{|k,v| v > 4 && !k[0].nil?}
+		@suggested_times 		= Stepup.group(:time, :user_id).count.select{|k,v| v > 4 && !k[0].nil?}
 	end
 
 	def new
@@ -28,7 +29,7 @@ class ContextController < ApplicationController
 				#remove location
 				Stepup.where(:location => params[:suggested]).where(:user_id => params[:context][:user_id]).delete_all
 			elsif (params[:suggested].include? ":")
-				#remove time
+				Stepup.where(:time => params[:suggested]).where(:user_id => params[:context][:user_id]).delete_all
 			else
 				#remove ip
 				Stepup.where(:ip => params[:suggested]).where(:user_id => params[:context][:user_id]).delete_all
@@ -39,6 +40,11 @@ class ContextController < ApplicationController
 
 		@context 	= Context.find(params[:id])
 		if @context.update_attributes(context_params)
+			if (@context.starting_time == @context.ending_time)
+				@context.starting_time = nil
+				@context.ending_time = nil
+				@context.save
+			end
 			redirect_to context_index_path
 		else
 

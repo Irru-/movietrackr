@@ -32,9 +32,14 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		@user = User.new(user_params)
-		@user.password = params[:user][:password]
+		@user 					= User.new(user_params)
+		@user.password 			= params[:user][:password]
+
 		if @user.save
+			context 			= Context.new
+			context.user_id 	= @user.id
+			context.save
+
 			sign_in @user
 			redirect_to '/movies'
 		else

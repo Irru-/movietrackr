@@ -82,14 +82,41 @@ class User < ActiveRecord::Base
 	def add_stepup(current_context)
 		stepup 			= Stepup.new
 		stepup.user_id 	= id
-		stepup.time 	= current_context[0]
-		stepup.ip 		= current_context[1]
-		if (current_context[2] == "Unknown")
-			stepup.location = nil
-		else
-			stepup.location = current_context[2]
+		
+		if (!check_time(current_context[0]))
+			stepup.time 	= round_to_next_hour(current_context[0])
 		end
+
+		if (!check_ip(current_context[1]))
+			stepup.ip 		= current_context[1]
+		end
+
+		if (!check_location(current_context[2]))		
+			
+			if (current_context[2] == "Unknown")
+				stepup.location = nil
+			else
+				stepup.location = current_context[2]
+			end
+
+		end
+
 		stepup.save
+	end
+
+
+	def round_to_next_hour(time)
+
+		hours_int = time[0..1].to_i
+		new_hours_int = hours_int + 1
+		if (new_hours_int.to_s.size == 1)
+			new_time = "0" + new_hours_int.to_s + ":00:00"
+		elsif (new_hours_int == 24)
+			new_time = "00:00:00"
+		else
+			new_time = new_hours_int.to_s + ":00:00"
+		end
+
 	end
 
 	private
