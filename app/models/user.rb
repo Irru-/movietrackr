@@ -110,11 +110,11 @@ class User < ActiveRecord::Base
 		hours_int = time[0..1].to_i
 		new_hours_int = hours_int + 1
 		if (new_hours_int.to_s.size == 1)
-			new_time = "0" + new_hours_int.to_s + ":00:00"
+			new_time = "0" + new_hours_int.to_s + ":00"
 		elsif (new_hours_int == 24)
-			new_time = "00:00:00"
+			new_time = "00:00"
 		else
-			new_time = new_hours_int.to_s + ":00:00"
+			new_time = new_hours_int.to_s + ":00"
 		end
 
 	end

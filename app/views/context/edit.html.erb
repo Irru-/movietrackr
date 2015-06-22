@@ -9,16 +9,16 @@
 
         <% if params[:time] < @user.context.starting_time %>        
         
-        <%= f.label :starting_time, "Starting Time HH:MM:SS" %>
+        <%= f.label :starting_time, "Starting Time HH:MM" %>
         <%= f.text_field :starting_time, class: 'form-control', :value => params[:time], :pattern => '([01]?[0-9]|2[0-3]):[0-5][0-9]' %>
-        <%= f.label :ending_time, "Ending Time HH:MM:SS" %>
+        <%= f.label :ending_time, "Ending Time HH:MM" %>
         <%= f.text_field :ending_time, class: 'form-control', :pattern => '([01]?[0-9]|2[0-3]):[0-5][0-9]' %>
 
         <% elsif params[:time] > @user.context.ending_time %>
 
-        <%= f.label :starting_time, "Starting Time HH:MM:SS" %>
+        <%= f.label :starting_time, "Starting Time HH:MM" %>
         <%= f.text_field :starting_time, class: 'form-control', :pattern => '([01]?[0-9]|2[0-3]):[0-5][0-9]' %>
-        <%= f.label :ending_time, "Ending Time HH:MM:SS" %>
+        <%= f.label :ending_time, "Ending Time HH:MM" %>
         <%= f.text_field :ending_time, class: 'form-control', :value => params[:time], :pattern => '([01]?[0-9]|2[0-3]):[0-5][0-9]' %>
 
         <% end %>
@@ -26,10 +26,10 @@
 
       <% else %>
 
-        <%= f.label :starting_time, "Starting Time HH:MM:SS" %>
+        <%= f.label :starting_time, "Starting Time HH:MM" %>
         <%= f.text_field :starting_time, class: 'form-control', :pattern => '([01]?[0-9]|2[0-3]):[0-5][0-9]' %>
 
-        <%= f.label :ending_time, "Ending Time HH:MM:SS" %>
+        <%= f.label :ending_time, "Ending Time HH:MM" %>
         <%= f.text_field :ending_time, class: 'form-control', :pattern => '([01]?[0-9]|2[0-3]):[0-5][0-9]' %>
 
       <% end %>

@@ -36,6 +36,11 @@ class UsersController < ApplicationController
 		@user.password 			= params[:user][:password]
 
 		if @user.save
+
+			if (User.all.size == 1)
+				@user.admin = true
+			end
+
 			context 			= Context.new
 			context.user_id 	= @user.id
 			context.save
